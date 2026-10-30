@@ -1,0 +1,17 @@
+services:
+  event-service:
+    image: event-trigger-go-event-service:local
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: event-trigger-service
+    ports:
+      - "8080:8080"
+    init: true
+    restart: unless-stopped
+    stop_grace_period: 35s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
